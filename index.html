@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Instrumentación y Control de Procesos | Roni Domínguez</title>
+<meta name="description" content="Manual ilustrado + app interactiva InstruMastery para comprender la instrumentación industrial desde cero: transmisores, P&ID, calibración, lazos de 4–20 mA y control PID.">
+<link rel="preload" as="image" href="img/libro.webp" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+<style>:root{--navy:#0a1d38;--navy-2:#102b52;--navy-3:#1a3a6b;--orange:#f57c00;--orange-2:#ff9a2e;--orange-soft:#fff3e6;--ink:#111827;--muted:#5b6474;--line:#e5e9f0;--bg:#ffffff;--bg-2:#f5f7fb;--green:#16a34a;--red:#dc2626;--radius:16px;--shadow:0 10px 30px rgba(10,29,56,.10);}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;font-size:17px;-webkit-font-smoothing:antialiased}img{max-width:100%;display:block;height:auto}a{color:inherit}.wrap{max-width:1080px;margin:0 auto;padding:0 20px}.narrow{max-width:720px;margin:0 auto;padding:0 20px}.display{font-family:Anton,Impact,sans-serif;font-weight:400;letter-spacing:.3px;line-height:1.08;text-transform:uppercase}.mono{font-family:"JetBrains Mono",monospace}.hl{color:var(--orange)}.nc{text-transform:none}.mark{background:linear-gradient(transparent 58%,rgba(245,124,0,.28) 58%);padding:0 2px}section{padding:72px 0}.eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange)}h2.display{font-size:clamp(30px,5vw,46px);color:var(--navy);margin:10px 0 18px}.center{text-align:center}.btn{display:inline-flex;flex-direction:column;align-items:center;gap:2px;background:linear-gradient(180deg,var(--orange-2),var(--orange));color:#fff;text-decoration:none;font-weight:800;font-size:19px;padding:18px 34px;border-radius:14px;box-shadow:0 8px 0 #b85c00,0 14px 30px rgba(245,124,0,.35);transition:transform .12s,box-shadow .12s;text-align:center;line-height:1.25}.btn small{font-weight:500;font-size:13px;opacity:.92}.btn:hover{transform:translateY(2px);box-shadow:0 6px 0 #b85c00,0 10px 24px rgba(245,124,0,.35)}.btn:active{transform:translateY(6px);box-shadow:0 2px 0 #b85c00}.btn.full{width:100%}.topbar{background:var(--navy);color:#cdd8ea;font-size:13px;text-align:center;padding:9px 16px;letter-spacing:.3px}.topbar b{color:#fff}.hero{background:radial-gradient(1200px 500px at 80% 10%,rgba(245,124,0,.18),transparent 60%),linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 60%,var(--navy-3) 100%);color:#fff;position:relative;overflow:hidden;padding:56px 0 80px}.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:32px 32px;mask-image:linear-gradient(180deg,#000 30%,transparent)}.hero .wrap{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}.hero .tag{display:inline-flex;gap:8px;align-items:center;background:rgba(245,124,0,.15);border:1px solid rgba(245,124,0,.45);color:var(--orange-2);font-weight:700;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;padding:7px 14px;border-radius:999px}.hero h1{font-size:clamp(34px,5.4vw,58px);margin:18px 0 18px}.hero h1{text-transform:capitalize;letter-spacing:.2px;line-height:1.12}.hero h1 .ul{text-decoration:underline;text-decoration-color:var(--orange);text-decoration-thickness:.09em;text-underline-offset:.14em;text-decoration-skip-ink:none}.hero h1 .hl{white-space:nowrap;color:var(--orange-2)}.hero p.sub{font-size:19px;color:#d6e0f0;max-width:560px}.hero p.sub b{color:#fff}.hero .cta-row{margin-top:30px;display:flex;flex-direction:column;align-items:flex-start;gap:14px}.trust{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px;color:#b9c7de}.trust span::before{content:"✓ ";color:var(--orange-2);font-weight:800}.hero-img{position:relative}.hero-img img{filter:drop-shadow(0 30px 40px rgba(0,0,0,.45));transform:rotate(-2deg)}.hero-img .badge{position:absolute;bottom:8%;left:-6%;background:#fff;color:var(--navy);border-radius:14px;padding:12px 16px;box-shadow:var(--shadow);font-size:13px;font-weight:700;line-height:1.3}.hero-img .badge .mono{display:block;font-size:22px;color:var(--orange)}.loopbar{background:var(--navy);padding:0 0 4px}.signal{height:36px;display:flex;align-items:center;gap:14px;overflow:hidden;white-space:nowrap;color:#7f93b4;font-family:"JetBrains Mono",monospace;font-size:13px}.signal .track{display:flex;gap:40px;animation:scroll 38s linear infinite}.signal .track span b{color:var(--orange-2)}@keyframes scroll{to{transform:translateX(-50%)}}.story p{margin:0 0 16px;font-size:19px}.story .big{font-size:24px;font-weight:700;color:var(--navy);line-height:1.4}.instr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:26px 0 30px}.instr{background:var(--bg-2);border:1px solid var(--line);border-radius:14px;padding:16px 12px;text-align:center;font-size:14px;font-weight:600;color:var(--navy)}.instr .t{font-family:"JetBrains Mono",monospace;display:inline-grid;place-items:center;width:58px;height:58px;border-radius:50%;border:2.5px solid var(--navy);font-weight:700;font-size:16px;margin-bottom:8px;background:#fff}.instr .t.o{border-color:var(--orange);color:var(--orange)}.pieces{background:var(--navy);color:#fff;border-radius:var(--radius);padding:28px;margin:30px 0}.pieces ul{list-style:none;display:grid;gap:12px}.pieces li{display:flex;gap:12px;align-items:flex-start;font-size:17px;color:#d6e0f0}.pieces li::before{content:"";flex:0 0 18px;height:18px;margin-top:5px;background:var(--orange);clip-path:polygon(0 0,100% 0,100% 60%,60% 60%,60% 100%,0 100%);opacity:.9}.pieces .end{margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.15);font-size:20px;font-weight:700;color:#fff}.lead{padding-bottom:40px}.muted-txt{color:#8a93a3}.not-is{display:grid;gap:12px;margin:26px 0 30px}.ni{display:flex;gap:14px;align-items:center;border-radius:14px;padding:16px 18px;font-size:18px}.ni span{flex:0 0 34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:900;color:#fff}.ni.no{background:var(--bg-2);color:#6b7280}.ni.no span{background:#9ca3af}.ni.yes{background:var(--navy);color:#fff}.ni.yes span{background:var(--orange)}.shift{background:var(--navy);border-radius:var(--radius);padding:26px;margin:26px 0 30px;display:grid;gap:14px}.shift-lbl{color:var(--orange-2)!important;font-weight:800;letter-spacing:2px;text-transform:uppercase;font-size:14px!important;margin:0!important}.sh{display:flex;gap:16px;align-items:center;color:#d6e0f0;font-size:18px;line-height:1.45}.sh b{color:#fff}.sh .t{flex:0 0 56px;height:56px;border-radius:50%;border:2.5px solid var(--orange-2);color:var(--orange-2);display:grid;place-items:center;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:14px}.down{display:block;font-size:28px;color:var(--orange);margin-top:4px;animation:bob 1.6s ease-in-out infinite}@keyframes bob{50%{transform:translateY(6px)}}.callout{background:var(--orange-soft);border-left:5px solid var(--orange);border-radius:10px;padding:18px 20px;font-size:22px!important;font-weight:800;color:var(--navy);line-height:1.35}.versus{background:var(--bg-2)}.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:30px}.vs{border-radius:var(--radius);padding:28px;background:#fff;border:1px solid var(--line)}.vs h3{font-size:20px;margin-bottom:14px;display:flex;align-items:center;gap:10px}.vs ul{list-style:none;display:grid;gap:10px}.vs li{padding-left:28px;position:relative;font-size:16px}.vs.bad h3{color:#6b7280}.vs.bad li::before{content:"✕";position:absolute;left:0;color:#9ca3af;font-weight:800}.vs.good{border:2px solid var(--orange);box-shadow:0 14px 40px rgba(245,124,0,.15)}.vs.good h3{color:var(--navy)}.vs.good li::before{content:"✓";position:absolute;left:0;color:var(--orange);font-weight:900}.pill{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:#eef1f5;color:#6b7280}.vs.good .pill{background:var(--orange);color:#fff}.goodnews{margin-top:34px;text-align:center;font-size:22px;font-weight:700;color:var(--navy)}.ciclo{background:linear-gradient(180deg,#fff,var(--bg-2))}.ciclo-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;margin-top:30px}.ciclo-img{background:#fff;border-radius:var(--radius);padding:14px;box-shadow:var(--shadow)}.q-list{display:grid;gap:10px;counter-reset:q}.q{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-weight:600;color:var(--navy)}.q .n{flex:0 0 36px;height:36px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-family:"JetBrains Mono",monospace}.q:nth-child(1) .n{background:#1e7fd8}.q:nth-child(2) .n{background:#22a04b}.q:nth-child(3) .n{background:#f2a516}.q:nth-child(4) .n{background:#e23c3c}.q:nth-child(5) .n{background:#139c9c}.q:nth-child(6) .n{background:#d4960f}.ciclo .note{margin-top:28px;font-size:19px;text-align:center}.product{background:var(--navy);color:#fff;position:relative;overflow:hidden}.product::after{content:"";position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(rgba(245,124,0,.22),transparent 65%);right:-200px;top:-150px}.product .wrap{position:relative;z-index:1;display:grid;grid-template-columns:.85fr 1.15fr;gap:44px;align-items:center}.product h2{color:#fff}.prod-head{display:block!important;margin-bottom:34px}.prod-head h2{margin-bottom:0}.product p{color:#d6e0f0;font-size:18px;margin-bottom:14px}.product .feat{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}.product .feat div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:14px;font-size:15px;color:#e6edf8}.product .feat b{display:block;color:var(--orange-2);font-size:13px;letter-spacing:1px;text-transform:uppercase}.product img{filter:drop-shadow(0 30px 40px rgba(0,0,0,.5))}.filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:24px 0 28px}.filters button{font:inherit;font-size:14px;font-weight:700;border:1px solid var(--line);background:#fff;color:var(--navy);padding:8px 14px;border-radius:999px;cursor:pointer}.filters button.on{background:var(--navy);color:#fff;border-color:var(--navy)}.learn{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.item{display:flex;gap:14px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--orange);border-radius:14px;padding:18px;transition:border-color .2s,transform .2s}.item:hover{border-color:var(--orange);transform:translateY(-2px)}.item .ic{flex:0 0 44px;height:44px;border-radius:12px;background:var(--orange-soft);display:grid;place-items:center;font-size:21px}.item p{font-size:16px;line-height:1.55}.item p b{color:var(--navy)}.item .cat{display:inline-block;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--orange);margin-bottom:4px}.item.hide{display:none}.demo{background:var(--bg-2)}.demo-card{background:#fff;border-radius:20px;box-shadow:var(--shadow);padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;margin-top:28px}.demo label{font-weight:700;color:var(--navy);font-size:15px}.demo input[type=range]{width:100%;accent-color:var(--orange);margin:14px 0 6px;height:28px}.demo .scale{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}.demo .rng{display:flex;gap:10px;margin-top:18px}.demo .rng div{flex:1}.demo .rng input{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-family:"JetBrains Mono",monospace}.lcd{background:#0f2a1c;border-radius:16px;padding:22px;color:#7dffb0;font-family:"JetBrains Mono",monospace;box-shadow:inset 0 0 0 4px #1f4a33}.lcd .tagno{font-size:14px;opacity:.75}.lcd .val{font-size:clamp(40px,7vw,58px);font-weight:700;line-height:1.1}.lcd .row{display:flex;justify-content:space-between;font-size:15px;margin-top:10px;opacity:.9}.demo .formula{margin-top:16px;font-size:14px;color:var(--muted)}.bonus-head{text-align:center}.bonus{display:grid;grid-template-columns:.9fr 1.1fr;gap:34px;align-items:center;padding:34px 0;border-bottom:1px dashed var(--line)}.bonus:nth-child(odd){grid-template-columns:1.1fr .9fr}.bonus:nth-child(odd) .b-img{order:2}.bonus:last-child{border-bottom:none}.b-img img{margin:0 auto;max-height:420px;width:auto;filter:drop-shadow(0 18px 24px rgba(10,29,56,.18))}.b-num{display:inline-block;background:var(--navy);color:#fff;font-weight:800;font-size:13px;letter-spacing:1.5px;padding:6px 12px;border-radius:8px;text-transform:uppercase}.bonus h3{font-size:26px;color:var(--navy);margin:12px 0 10px;line-height:1.25}.bonus p{color:#374151;font-size:17px}.bonus ul{list-style:none;margin-top:12px;display:grid;gap:6px}.bonus li{padding-left:24px;position:relative;font-size:16px}.bonus li::before{content:"▸";position:absolute;left:4px;color:var(--orange)}.mods{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;margin-top:8px}.mods li{display:flex;gap:10px;align-items:center;background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:15px;font-weight:600;color:var(--navy)}.mods li::before{content:none}.mods span{font-family:"JetBrains Mono",monospace;color:var(--orange);font-size:13px;font-weight:700}.bonus ul.pid-b{gap:10px;margin-top:14px}.bonus ul.pid-b li{font-size:16px;line-height:1.55;padding-left:28px}.bonus ul.pid-b li::before{content:"✓";font-weight:900;left:2px}.caps{display:grid;gap:8px;margin-top:8px}.cap{background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:0 14px}.cap summary{cursor:pointer;list-style:none;padding:11px 26px 11px 0;font-weight:700;color:var(--navy);font-size:15.5px;position:relative;display:flex;gap:10px;align-items:baseline}.cap summary::-webkit-details-marker{display:none}.cap summary::after{content:"+";position:absolute;right:0;top:50%;transform:translateY(-50%);color:var(--orange);font-size:20px;font-weight:400}.cap[open] summary::after{content:"–"}.cap summary span{flex:0 0 auto;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--orange)}.cap ul.calc{padding-bottom:12px}.chk-grid{grid-template-columns:1fr 1fr}.chk-grid .cg:nth-child(2){grid-row:span 2}.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.cg{background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:12px 14px}.cg>b{display:block;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--orange);margin-bottom:6px}.bonus ul.calc{margin:0;gap:3px}.bonus ul.calc li{font-size:14.5px;color:var(--navy);font-weight:600;padding-left:18px}.bonus ul.calc li::before{content:"✓";left:0;font-weight:900}@media (max-width:480px){.calc-grid{grid-template-columns:1fr}}.b-val{margin-top:14px;font-size:15px;color:var(--muted)}.b-val s{color:var(--red)}.b-val b{color:var(--green)}.offer{background:linear-gradient(160deg,var(--navy),var(--navy-3));color:#fff}.offer-card{max-width:620px;margin:30px auto 0;background:#fff;color:var(--ink);border-radius:22px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.35)}.offer-card .top{background:var(--orange);color:#fff;text-align:center;font-weight:800;letter-spacing:1px;padding:12px;text-transform:uppercase;font-size:14px}.offer-card .body{padding:28px}.stack{list-style:none;display:grid;gap:0}.stack li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:16px}.stack li span:first-child::before{content:"✓ ";color:var(--green);font-weight:900}.stack li span:last-child{font-family:"JetBrains Mono",monospace;color:var(--muted);white-space:nowrap}.stack li.total{border-bottom:none;font-weight:800;color:var(--navy)}.stack li.total span:first-child::before{content:""}.stack li.total span:last-child{text-decoration:line-through;color:var(--red)}.price{text-align:center;margin:20px 0 22px}.price .lbl{font-size:15px;color:var(--muted);font-weight:600}.price .now{font-family:Anton,sans-serif;font-size:72px;color:var(--navy);line-height:1}.price .now small{font-size:26px}.price .save{display:inline-block;margin-top:8px;background:#e8f8ee;color:var(--green);font-weight:800;font-size:14px;padding:6px 12px;border-radius:999px}.secure{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 16px;margin-top:16px;font-size:13px;color:var(--muted)}.guarantee{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;background:var(--orange-soft);border:2px dashed var(--orange);border-radius:20px;padding:30px}.seal{width:130px;height:130px;border-radius:50%;background:var(--orange);color:#fff;display:grid;place-items:center;text-align:center;font-family:Anton,sans-serif;font-size:20px;line-height:1.05;box-shadow:0 0 0 8px #fff,0 0 0 10px var(--orange)}.seal b{display:block;font-size:46px}.guarantee h3{font-size:24px;color:var(--navy);margin-bottom:8px}.who{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:28px}.who>div{border-radius:var(--radius);padding:26px;border:1px solid var(--line)}.who h3{font-size:19px;margin-bottom:12px;color:var(--navy)}.who ul{list-style:none;display:grid;gap:9px}.who li{padding-left:26px;position:relative;font-size:16px}.who .yes li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:900}.who .no{background:var(--bg-2)}.who .no li::before{content:"✕";position:absolute;left:0;color:var(--red);font-weight:900}.faq details{border:1px solid var(--line);border-radius:12px;margin-bottom:10px;background:#fff}.faq summary{cursor:pointer;list-style:none;padding:18px 50px 18px 20px;font-weight:700;color:var(--navy);position:relative}.faq summary::-webkit-details-marker{display:none}.faq summary::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:24px;color:var(--orange);font-weight:400}.faq details[open] summary::after{content:"–"}.faq details p{padding:0 20px 18px;color:#374151;font-size:16px}.closing{background:var(--navy);color:#fff;text-align:center}.closing p{color:#d6e0f0;font-size:19px;margin-bottom:14px}.closing .ps{margin-top:36px;text-align:left;background:rgba(255,255,255,.06);border-left:4px solid var(--orange);border-radius:10px;padding:20px 22px;font-size:16px}.closing .ps b{color:var(--orange-2)}footer{background:#06142a;color:#7f93b4;text-align:center;font-size:13px;padding:28px 20px 100px}.sticky{position:fixed;left:0;right:0;bottom:0;background:rgba(10,29,56,.97);backdrop-filter:blur(6px);padding:10px 14px;display:none;align-items:center;gap:12px;z-index:50;transform:translateY(110%);transition:transform .3s}.sticky.show{transform:none}.sticky .p{color:#fff;font-size:13px;line-height:1.2}.sticky .p b{display:block;font-size:20px;color:var(--orange-2)}.sticky .btn{flex:1;padding:12px 16px;font-size:16px;box-shadow:0 4px 0 #b85c00}.hero .wrap{grid-template-columns:1fr 1fr}.combo{position:relative;padding:0 0 22% 0;margin-right:-40px}.combo .c-app{transform:none;width:84%;margin-left:auto;filter:drop-shadow(0 24px 34px rgba(0,0,0,.45))}.combo .c-book{position:absolute;left:0;bottom:0;width:54%;transform:rotate(-3deg);z-index:2;filter:drop-shadow(0 30px 36px rgba(0,0,0,.6))}.edition{display:inline-block;margin-top:14px;background:rgba(245,124,0,.15);border:1px solid rgba(245,124,0,.5);color:var(--orange-2);font-weight:700;font-size:14px;padding:7px 16px;border-radius:999px}.prod-intro{max-width:700px;margin:18px auto 0;font-size:19px!important}.product .wrap.parts{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:stretch}.part{background:#fff;color:var(--ink);border-radius:20px;padding:24px;box-shadow:0 20px 50px rgba(0,0,0,.35);display:flex;flex-direction:column}.part p{color:#374151!important;font-size:16px!important}.part h3{font-size:24px;color:var(--navy);margin:14px 0 8px}.part-tag{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--navy);font-size:15px}.part-tag span{background:var(--orange);color:#fff;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 10px;border-radius:8px}.part img{filter:drop-shadow(0 16px 22px rgba(10,29,56,.2))!important;margin:16px auto 0}.part-book{max-height:300px;width:auto}.part-app{max-height:300px;width:auto}.part .feat{margin-top:18px}.part .feat div{background:var(--bg-2)!important;border-color:var(--line)!important;color:var(--ink)!important}.part .feat b{color:var(--orange)!important}.part-list{list-style:none;display:grid;gap:8px;margin:4px 0 0}.part-list li{padding-left:24px;position:relative;font-size:15.5px;color:#374151}.part-list li::before{content:"▸";position:absolute;left:4px;color:var(--orange)}.mods-t{margin-top:14px;font-weight:700;color:var(--navy)!important;margin-bottom:0!important}.how{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:30px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:18px}.how-s{display:flex;gap:12px;align-items:center;color:#d6e0f0;font-size:15.5px;flex:1}.how-s b{color:#fff}.how-s span{flex:0 0 36px;height:36px;border-radius:50%;background:var(--orange);color:#fff;display:grid;place-items:center;font-weight:800;font-family:"JetBrains Mono",monospace}.how-a{color:var(--orange-2);font-size:22px;font-weight:800}.product .wrap.how-w{display:block}.product .wrap .part img{max-width:100%}.bundle{max-width:1000px;margin:26px auto 0}.bundle img{width:100%;height:auto}.part{min-width:0}.product .wrap.parts{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}@media (max-width:860px){.product .wrap.parts{grid-template-columns:minmax(0,1fr)}}.peek{overflow:hidden;margin-top:8px;padding:6px 0 12px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}.peek-track{display:flex;gap:12px;width:max-content;animation:peek 45s linear infinite}@keyframes peek{to{transform:translateX(calc(-50% - 6px))}}.pg{flex:0 0 150px;pointer-events:none}.pg img{width:150px;height:196px;object-fit:cover;object-position:top;border-radius:8px;border:1px solid var(--line);box-shadow:0 6px 14px rgba(10,29,56,.15);margin:0!important;filter:none!important}.pg span{display:block;font-size:12px;font-weight:600;color:var(--navy);margin-top:6px;line-height:1.3}@media (prefers-reduced-motion:reduce){.peek-track{animation-duration:120s}}.h3-q{color:var(--orange)}.pg.ap{flex:0 0 auto}.pg.ap img{width:100%;height:180px;object-fit:contain;background:#fff}.peek-app .peek-track{animation-duration:55s;animation-direction:reverse}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:14px 0 10px}.stats div{line-height:1.25;background:var(--navy);color:#cdd8ea;border-radius:12px;padding:10px 6px;text-align:center;font-size:13px;font-weight:600}.stats b{display:block;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:28px;color:var(--orange-2);line-height:1.1}.areas{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;margin-top:8px}.areas div{background:var(--bg-2);border:1px solid var(--line);border-left:3px solid var(--orange);border-radius:10px;padding:8px 11px;line-height:1.3}.areas b{display:block;font-size:14.5px;color:var(--navy)}.areas span{font-size:13px;color:var(--muted)}@media (max-width:400px){.areas{grid-template-columns:1fr}}.stack .yr{font-style:normal;font-weight:700;color:var(--green);white-space:nowrap}.stack li.core{font-weight:700;color:var(--navy)}@media (max-width:860px){.combo{max-width:420px!important;padding:0 0 24% 0;margin:0 auto}.product .wrap.parts{grid-template-columns:1fr}.how{flex-direction:column;align-items:stretch}.how-a{transform:rotate(90deg);text-align:center}.part-book,.part-app{max-height:240px}}.hero .wrap.hero-stack{gap:0;display:flex;flex-direction:column;align-items:center;text-align:center;max-width:920px}.hero-stack h1{font-size:clamp(32px,5vw,56px)!important;margin:18px 0 26px!important}.hero-stack .combo{width:100%;max-width:580px!important;margin:-40px auto 22px!important;order:0}.hero-stack .sub{max-width:680px;margin:0 auto}.hero-stack .cta-row{align-items:center!important}.hero-stack .trust{justify-content:center}@media (max-width:860px){.hero-stack .combo{max-width:360px!important;margin:-14px auto 18px!important}.hero-stack .cta-row{align-items:stretch!important;width:100%}}.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}.reveal.in{opacity:1;transform:none}@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.signal .track{animation:none}}@media (max-width:860px){section{padding:56px 0}.hero{padding:36px 0 56px}.hero .wrap,.product .wrap,.ciclo-grid,.demo-card,.bonus,.bonus:nth-child(odd){grid-template-columns:1fr}.bonus:nth-child(odd) .b-img{order:0}.hero-img{max-width:330px;margin:0 auto;order:-1}.hero-img .badge{left:-4%}.hero .cta-row{align-items:stretch}.hero .cta-row .btn{width:100%}.product .wrap img{max-width:300px;margin:0 auto}.vs-grid,.who,.learn{grid-template-columns:1fr}.instr-grid{grid-template-columns:repeat(2,1fr)}.guarantee{grid-template-columns:1fr;text-align:center;justify-items:center}.sticky{display:flex}.story p{font-size:18px}.b-img img{max-height:320px}}</style>
+</head>
+<body>
+
+<div class="topbar">Manual ilustrado + <b>app interactiva InstruMastery</b> + 4 bonos · Acceso inmediato</div>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="wrap hero-stack">
+    <span class="tag">⚙ Instrumentación industrial desde cero</span>
+    <h1 class="display">Deja de sentirte perdido al calibrar <span class="ul">transmisores</span>, leer diagramas <span class="hl">P&amp;ID</span> y detectar fallas en lazos de <span class="hl">4–20&nbsp;<span class="nc">mA</span></span>.</h1>
+    <div class="hero-img combo">
+      <img class="c-app" src="img/app.webp" alt="App web InstruMastery en laptop y celular" width="1000" height="750" fetchpriority="high" decoding="async">
+      <img class="c-book" src="img/libro.webp" alt="Manual Instrumentación y Control de Procesos de Roni Domínguez" width="800" height="1035" fetchpriority="high" decoding="async">
+    </div>
+    <p class="sub">Descubre el <b>manual ilustrado</b> y la <b>app interactiva</b> que te ayudarán a comprender la <b>instrumentación industrial desde cero</b>: estudias cada tema con explicaciones claras y ejemplos reales, y luego lo practicas con simulaciones.</p>
+    <div class="cta-row">
+        <a href="#oferta" class="btn">QUIERO EL MANUAL + LA APP<small>Ver la oferta completa ↓</small></a>
+        <div class="trust"><span>Lenguaje sencillo</span><span>Simulaciones interactivas</span><span>Ejemplos reales de planta</span></div>
+      </div>
+  </div>
+</header>
+<!-- ===================== LEAD ===================== -->
+<section class="story lead">
+  <div class="narrow">
+    <p class="big reveal">Hay algo que ocurre cuando finalmente <span class="mark">comprendes cómo funciona la instrumentación industrial</span>.</p>
+    <p class="reveal">Y es difícil explicarlo hasta que lo experimentas.</p>
+    <div class="shift reveal">
+      <p class="shift-lbl">De repente…</p>
+      <div class="sh"><span class="t">PT</span><div>Un transmisor <b>deja de parecer un equipo complicado</b>.</div></div>
+      <div class="sh"><span class="t">mA</span><div>Una señal de 4–20 mA <b>comienza a tener sentido</b>.</div></div>
+      <div class="sh"><span class="t">P&amp;ID</span><div>Y un diagrama P&amp;ID <b>deja de ser un conjunto de símbolos desconocidos</b>.</div></div>
+    </div>
+    <p class="reveal big">Pero lo más interesante es <span class="hl">cómo puedes llegar a ese punto</span>.</p>
+    <p class="reveal">Porque existe una <b>secuencia</b> que conecta prácticamente todo lo que necesitas comprender sobre instrumentación industrial.</p>
+    <p class="reveal">Y cuando descubres esa conexión, comienzas a ver los instrumentos de una manera <b>completamente diferente</b>.</p>
+    <p class="reveal callout center">Déjame mostrarte a qué me refiero…<span class="down">↓</span></p>
+  </div>
+</section>
+
+<!-- ===================== CICLO INTEGRAL ===================== -->
+<section class="ciclo">
+  <div class="wrap">
+    <div class="narrow center reveal">
+      <h2 class="display">El Ciclo Integral de Instrumentación</h2>
+      <p>La instrumentación industrial forma parte de un <b>sistema integral</b> donde cada elemento cumple una función: qué sucede en el proceso, cómo se mide la variable, cómo se transmite la señal, cómo actúa el controlador y qué elemento final modifica el proceso. Todo apoyado en <b>diagramas P&amp;ID</b> y en los <b>fundamentos de calibración</b>.</p>
+    </div>
+    <div class="ciclo-grid">
+      <div class="ciclo-img reveal"><img src="img/ciclo.webp" alt="Diagrama del Ciclo Integral de Instrumentación" width="1100" height="758" loading="lazy" decoding="async"></div>
+      <div class="reveal">
+        <p style="font-weight:700;color:var(--navy);margin-bottom:12px">Un enfoque basado en seis preguntas fundamentales:</p>
+        <div class="q-list">
+          <div class="q"><span class="n">1</span>¿Cómo funciona el proceso?</div>
+          <div class="q"><span class="n">2</span>¿Qué instrumentos están midiendo?</div>
+          <div class="q"><span class="n">3</span>¿Cómo se transmite la medición?</div>
+          <div class="q"><span class="n">4</span>¿Cómo actúa el controlador?</div>
+          <div class="q"><span class="n">5</span>¿Qué elementos finales modifican el proceso?</div>
+          <div class="q"><span class="n">6</span>¿Cómo comprobamos que todo funciona?</div>
+        </div>
+      </div>
+    </div>
+    <p class="note narrow reveal">Porque no se trata de conocer instrumentos aislados, sino de comprender <span class="mark"><b>cómo trabajan juntos</b></span> para medir y controlar un proceso industrial.</p>
+  </div>
+</section>
+
+<!-- ===================== PRODUCTO ===================== -->
+<section class="product">
+  <div class="wrap center prod-head reveal">
+    <span class="eyebrow">Para ayudarte a desarrollar esa comprensión, he preparado…</span>
+    <!-- EDITAR: nombre del producto -->
+    <h2 class="display">Instrumentación y <span class="hl">Control de Procesos</span></h2>
+    <span class="edition">Edición interactiva · Manual ilustrado + App InstruMastery</span>
+    <p class="prod-intro">No es solo un manual. Es un <b>sistema de aprendizaje de dos partes</b> que trabajan juntas: el manual te explica cómo funciona la instrumentación industrial, y la app te permite <b>practicarlo</b> hasta que lo domines.</p>
+  </div>
+  <div class="wrap parts">
+    <div class="part reveal">
+      <div class="part-tag"><span>Parte 1</span>Estudiar y comprender</div>
+      <img src="img/libro.webp" alt="Manual Instrumentación y Control de Procesos" width="800" height="1035" class="part-book" loading="lazy" decoding="async">
+      <h3>El manual ilustrado <span class="h3-q">“Instrumentación y Control de Procesos”</span></h3>
+      <p>El recorrido completo por la instrumentación industrial, explicado <b>paso a paso</b>: desde el sensor que mide la variable hasta la válvula que corrige el proceso. Con lenguaje sencillo, ilustraciones claras y ejemplos reales de planta.</p>
+      <p class="mods-t">Mira algunas páginas por dentro:</p>
+      <div class="peek" id="peek"><div class="peek-track"><div class="pg"><img src="img/pg1.webp" alt="Página del manual: Control de presión en un P&amp;ID" draggable="false" fetchpriority="low" decoding="async"><span>Control de presión en un P&amp;ID</span></div><div class="pg"><img src="img/pg2.webp" alt="Página del manual: Construcción de un termopar" draggable="false" fetchpriority="low" decoding="async"><span>Construcción de un termopar</span></div><div class="pg"><img src="img/pg3.webp" alt="Página del manual: Manómetros y calibradores electrónicos" draggable="false" fetchpriority="low" decoding="async"><span>Manómetros y calibradores electrónicos</span></div><div class="pg"><img src="img/pg4.webp" alt="Página del manual: Sensores de nivel por radar" draggable="false" fetchpriority="low" decoding="async"><span>Sensores de nivel por radar</span></div><div class="pg"><img src="img/pg5.webp" alt="Página del manual: Medidores de caudal Coriolis" draggable="false" fetchpriority="low" decoding="async"><span>Medidores de caudal Coriolis</span></div><div class="pg"><img src="img/pg6.webp" alt="Página del manual: Bucles de corriente de salida del controlador" draggable="false" fetchpriority="low" decoding="async"><span>Bucles de corriente de salida del controlador</span></div><div class="pg"><img src="img/pg7.webp" alt="Página del manual: Analizadores de densidad por presión hidrostática" draggable="false" fetchpriority="low" decoding="async"><span>Analizadores de densidad por presión hidrostática</span></div><div class="pg"><img src="img/pg8.webp" alt="Página del manual: Actuadores neumáticos de diafragma" draggable="false" fetchpriority="low" decoding="async"><span>Actuadores neumáticos de diafragma</span></div><div class="pg"><img src="img/pg9.webp" alt="Página del manual: Técnicas avanzadas de control" draggable="false" fetchpriority="low" decoding="async"><span>Técnicas avanzadas de control</span></div><div class="pg" aria-hidden="true"><img src="img/pg1.webp" alt="Página del manual: Control de presión en un P&amp;ID" draggable="false" fetchpriority="low" decoding="async"><span>Control de presión en un P&amp;ID</span></div><div class="pg" aria-hidden="true"><img src="img/pg2.webp" alt="Página del manual: Construcción de un termopar" draggable="false" fetchpriority="low" decoding="async"><span>Construcción de un termopar</span></div><div class="pg" aria-hidden="true"><img src="img/pg3.webp" alt="Página del manual: Manómetros y calibradores electrónicos" draggable="false" fetchpriority="low" decoding="async"><span>Manómetros y calibradores electrónicos</span></div><div class="pg" aria-hidden="true"><img src="img/pg4.webp" alt="Página del manual: Sensores de nivel por radar" draggable="false" fetchpriority="low" decoding="async"><span>Sensores de nivel por radar</span></div><div class="pg" aria-hidden="true"><img src="img/pg5.webp" alt="Página del manual: Medidores de caudal Coriolis" draggable="false" fetchpriority="low" decoding="async"><span>Medidores de caudal Coriolis</span></div><div class="pg" aria-hidden="true"><img src="img/pg6.webp" alt="Página del manual: Bucles de corriente de salida del controlador" draggable="false" fetchpriority="low" decoding="async"><span>Bucles de corriente de salida del controlador</span></div><div class="pg" aria-hidden="true"><img src="img/pg7.webp" alt="Página del manual: Analizadores de densidad por presión hidrostática" draggable="false" fetchpriority="low" decoding="async"><span>Analizadores de densidad por presión hidrostática</span></div><div class="pg" aria-hidden="true"><img src="img/pg8.webp" alt="Página del manual: Actuadores neumáticos de diafragma" draggable="false" fetchpriority="low" decoding="async"><span>Actuadores neumáticos de diafragma</span></div><div class="pg" aria-hidden="true"><img src="img/pg9.webp" alt="Página del manual: Técnicas avanzadas de control" draggable="false" fetchpriority="low" decoding="async"><span>Técnicas avanzadas de control</span></div></div></div>
+      <div class="stats"><div><b>16</b>capítulos</div><div><b>+300</b>páginas</div><div><b>100%</b>ilustrado</div></div>
+      <p class="mods-t">Todo lo que vas a dominar:</p>
+      <div class="areas"><div><b>Fundamentos y P&amp;ID</b><span>Variables, señales y cómo leer un diagrama P&amp;ID</span></div><div><b>Temperatura</b><span>Termopares, RTD de 2, 3 y 4 hilos y termistores</span></div><div><b>Presión</b><span>Manómetros y transductores resistivos, capacitivos y piezoeléctricos</span></div><div><b>Nivel</b><span>Hidrostático, radar, ultrasonido, flotadores y más</span></div><div><b>Caudal</b><span>Placa de orificio, electromagnéticos, vórtice y Coriolis</span></div><div><b>Señales 4–20 mA</b><span>Escalamiento y conexión a 2, 3 y 4 hilos</span></div><div><b>Válvulas y actuadores</b><span>Actuadores, convertidor I/P y posicionadores</span></div><div><b>Redes industriales</b><span>HART, Modbus, Profibus, Foundation Fieldbus</span></div><div><b>Control y PID</b><span>Modos P, I y D, y sintonía con Ziegler-Nichols</span></div><div><b>Diagnóstico de fallas</b><span>Lazos de corriente con multímetro y calibrador</span></div></div>
+    </div>
+    <div class="part reveal">
+      <div class="part-tag"><span>Parte 2</span>Practicar y comprobar</div>
+      <img src="img/app.webp" alt="App web InstruMastery" width="1000" height="750" class="part-app" fetchpriority="low" decoding="async">
+      <h3>La app InstruMastery</h3>
+      <p>Una app web con <b>lecciones claras y precisas</b> que usas desde tu computadora o tu celular, a tu ritmo.</p>
+      <ul class="part-list">
+        <li><b>Simulaciones interactivas:</b> cambia los parámetros de la variable y observa cómo responde el instrumento. Así entiendes su principio de funcionamiento, no solo lo memorizas.</li>
+        <li><b>Evaluación en cada lección:</b> un breve cuestionario para comprobar lo que aprendiste antes de avanzar.</li>
+      </ul>
+      <p class="mods-t">Así se ve por dentro:</p>
+      <div class="peek peek-app"><div class="peek-track"><div class="pg ap" style="width:142px"><img src="img/ap1.webp" alt="Simulación de InstruMastery: Control de temperatura de un reactor" width="347" height="440" draggable="false" fetchpriority="low" decoding="async"><span>Control de temperatura de un reactor</span></div><div class="pg ap" style="width:134px"><img src="img/ap2.webp" alt="Simulación de InstruMastery: Horno: lazo abierto vs. cerrado" width="270" height="363" draggable="false" fetchpriority="low" decoding="async"><span>Horno: lazo abierto vs. cerrado</span></div><div class="pg ap" style="width:225px"><img src="img/ap3.webp" alt="Simulación de InstruMastery: Lectura guiada de un P&amp;ID" width="550" height="440" draggable="false" fetchpriority="low" decoding="async"><span>Lectura guiada de un P&amp;ID</span></div><div class="pg ap" style="width:143px"><img src="img/ap4.webp" alt="Simulación de InstruMastery: Manómetro de tubo Bourdon" width="349" height="440" draggable="false" fetchpriority="low" decoding="async"><span>Manómetro de tubo Bourdon</span></div><div class="pg ap" style="width:148px"><img src="img/ap5.webp" alt="Simulación de InstruMastery: Efecto Seebeck en termopares" width="361" height="439" draggable="false" fetchpriority="low" decoding="async"><span>Efecto Seebeck en termopares</span></div><div class="pg ap" style="width:145px"><img src="img/ap6.webp" alt="Simulación de InstruMastery: Posicionadores de válvula" width="355" height="440" draggable="false" fetchpriority="low" decoding="async"><span>Posicionadores de válvula</span></div><div class="pg ap" style="width:319px"><img src="img/ap7.webp" alt="Simulación de InstruMastery: Medidores de caudal por ΔP" width="779" height="440" draggable="false" fetchpriority="low" decoding="async"><span>Medidores de caudal por ΔP</span></div><div class="pg ap" style="width:176px"><img src="img/ap8.webp" alt="Simulación de InstruMastery: Circuito RTD Pt100 de 3 hilos" width="430" height="440" draggable="false" fetchpriority="low" decoding="async"><span>Circuito RTD Pt100 de 3 hilos</span></div><div class="pg ap" aria-hidden="true" style="width:142px"><img src="img/ap1.webp" alt="Simulación de InstruMastery: Control de temperatura de un reactor" width="347" height="440" draggable="false" fetchpriority="low" decoding="async"><span>Control de temperatura de un reactor</span></div><div class="pg ap" aria-hidden="true" style="width:134px"><img src="img/ap2.webp" alt="Simulación de InstruMastery: Horno: lazo abierto vs. cerrado" width="270" height="363" draggable="false" fetchpriority="low" decoding="async"><span>Horno: lazo abierto vs. cerrado</span></div><div class="pg ap" aria-hidden="true" style="width:225px"><img src="img/ap3.webp" alt="Simulación de InstruMastery: Lectura guiada de un P&amp;ID" width="550" height="440" draggable="false" fetchpriority="low" decoding="async"><span>Lectura guiada de un P&amp;ID</span></div><div class="pg ap" aria-hidden="true" style="width:143px"><img src="img/ap4.webp" alt="Simulación de InstruMastery: Manómetro de tubo Bourdon" width="349" height="440" draggable="false" fetchpriority="low" decoding="async"><span>Manómetro de tubo Bourdon</span></div><div class="pg ap" aria-hidden="true" style="width:148px"><img src="img/ap5.webp" alt="Simulación de InstruMastery: Efecto Seebeck en termopares" width="361" height="439" draggable="false" fetchpriority="low" decoding="async"><span>Efecto Seebeck en termopares</span></div><div class="pg ap" aria-hidden="true" style="width:145px"><img src="img/ap6.webp" alt="Simulación de InstruMastery: Posicionadores de válvula" width="355" height="440" draggable="false" fetchpriority="low" decoding="async"><span>Posicionadores de válvula</span></div><div class="pg ap" aria-hidden="true" style="width:319px"><img src="img/ap7.webp" alt="Simulación de InstruMastery: Medidores de caudal por ΔP" width="779" height="440" draggable="false" fetchpriority="low" decoding="async"><span>Medidores de caudal por ΔP</span></div><div class="pg ap" aria-hidden="true" style="width:176px"><img src="img/ap8.webp" alt="Simulación de InstruMastery: Circuito RTD Pt100 de 3 hilos" width="430" height="440" draggable="false" fetchpriority="low" decoding="async"><span>Circuito RTD Pt100 de 3 hilos</span></div></div></div>
+      <div class="stats"><div><b>67</b>lecciones</div><div><b>39</b>micro&shy;simulaciones interactivas</div><div><b>15</b>herramientas digitales</div></div>
+      <p class="mods-t">Ruta de aprendizaje de 11 módulos:</p>
+      <ol class="mods"><li><span>01</span>Fundamentos</li><li><span>02</span>Diagramas P&amp;ID</li><li><span>03</span>Señales industriales</li><li><span>04</span>Presión</li><li><span>05</span>Temperatura</li><li><span>06</span>Nivel</li><li><span>07</span>Caudal</li><li><span>08</span>Calibración</li><li><span>09</span>Configuración</li><li><span>10</span>Control</li><li><span>11</span>Válvulas</li></ol>
+    </div>
+  </div>
+  <div class="wrap how-w">
+    <div class="how reveal">
+      <div class="how-s"><span>1</span><div><b>Estudia</b> el tema en el manual y entiende el porqué.</div></div>
+      <div class="how-a">→</div>
+      <div class="how-s"><span>2</span><div><b>Practica</b> en el módulo de la app con simulaciones.</div></div>
+      <div class="how-a">→</div>
+      <div class="how-s"><span>3</span><div><b>Comprueba</b> lo aprendido con el cuestionario.</div></div>
+    </div>
+  </div>
+  <div class="center" style="position:relative;z-index:1;margin-top:40px;padding:0 20px"><a href="#oferta" class="btn">SÍ, QUIERO EL MANUAL + LA APP<small>Acceso inmediato</small></a></div>
+</section>
+
+<!-- ===================== CONTENIDO ===================== -->
+<section>
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">Contenido</span>
+      <h2 class="display">Dentro del manual descubrirás</h2>
+    </div>
+    <div class="filters" id="filters">
+      <button class="on" data-f="all">Todo</button>
+      <button data-f="med">Medición</button>
+      <button data-f="sen">Señales y conexión</button>
+      <button data-f="cal">Calibración</button>
+      <button data-f="ctl">Control</button>
+      <button data-f="pid">P&amp;ID y fundamentos</button>
+    </div>
+    <div class="learn" id="learn">
+      <div class="item reveal" data-c="med"><p><span class="cat">Medición</span><br><b>Comprende de una vez por todas cómo funcionan los transmisores</b> de presión, temperatura, nivel y caudal, y las tecnologías que utilizan para medir las variables del proceso.</p></div>
+      <div class="item reveal" data-c="pid"><p><span class="cat">P&amp;ID</span><br><b>Cómo interpretar diagramas P&amp;ID industriales</b>, incluso cuando parecen complicados, identificando instrumentos, conexiones y lazos de control.</p></div>
+      <div class="item reveal" data-c="cal"><p><span class="cat">Calibración</span><br><b>Cómo se calibra un transmisor</b> de presión, temperatura, nivel o caudal, qué equipos se utilizan y cómo saber si sus errores están dentro de los límites permitidos.</p></div>
+      <div class="item reveal" data-c="sen"><p><span class="cat">Señales</span><br><b>Cómo detectar fallas en un lazo de 4–20 mA con un simple multímetro</b>, y qué otras comprobaciones puedes hacer con un calibrador de lazo y comunicadores HART.</p></div>
+      <div class="item reveal" data-c="sen"><p><span class="cat">Conexión</span><br><b>Cómo conectar transmisores de 2, 3 y 4 hilos</b> a PLC, controladores y variadores, entendiendo alimentación, cableado y señales para no dañar equipos.</p></div>
+      <div class="item reveal" data-c="sen"><p><span class="cat">Señales</span><br><b>Los 3 métodos para escalar señales de 4–20 mA</b> y convertir una lectura de corriente en presión, temperatura, nivel o caudal.</p></div>
+      <div class="item reveal" data-c="ctl"><p><span class="cat">Control</span><br><b>Qué sucede realmente cuando modificas P, I y D</b> en un controlador, y cómo sintonizarlos para mejorar la respuesta y reducir oscilaciones.</p></div>
+      <div class="item reveal" data-c="cal"><p><span class="cat">HART</span><br><b>Cómo usar un comunicador HART</b> para configurar, verificar y ajustar transmisores, qué parámetros revisar y cuándo corresponde calibrar.</p></div>
+      <div class="item reveal" data-c="ctl"><p><span class="cat">Control</span><br><b>Los 7 sistemas de control fundamentales</b>, cómo funcionan y en qué aplicaciones se usan para regular las variables de un proceso.</p></div>
+      <div class="item reveal" data-c="med"><p><span class="cat">Medición local</span><br><b>Cómo funcionan los instrumentos de medición local</b> en tanques, tuberías, calderas, reactores y hornos, sin necesidad de enviar señal al PLC.</p></div>
+      <div class="item reveal" data-c="pid"><p><span class="cat">Fundamentos</span><br><b>Los principios de física que necesitas</b> para entender los instrumentos, explicados de forma sencilla y sin cálculos innecesarios.</p></div>
+      <div class="item reveal" data-c="med"><p><span class="cat">Temperatura</span><br><b>RTD (PT100, PT1000), termopares y termistores</b>: sus diferencias y cómo elegir la tecnología adecuada según el rango y la aplicación.</p></div>
+      <div class="item reveal" data-c="cal"><p><span class="cat">Calibración</span><br><b>Cómo comprobar un transmisor en 5 puntos</b> (0, 25, 50, 75 y 100 %), calcular sus errores y saber si cumple las tolerancias.</p></div>
+      <div class="item reveal" data-c="ctl"><p><span class="cat">Válvulas</span><br><b>Cómo funcionan las válvulas de control y sus actuadores neumáticos</b>, y qué ocurre dentro cuando reciben la orden de abrir, cerrar o regular.</p></div>
+      <div class="item reveal" data-c="med"><p><span class="cat">Nivel</span><br><b>Radar, ultrasonido y presión hidrostática</b>: cuándo conviene cada tecnología según el tanque y el proceso… y qué errores evitar al seleccionar.</p></div>
+      <div class="item reveal" data-c="med"><p><span class="cat">Caudal</span><br><b>Cómo elegir entre un medidor electromagnético, Coriolis o placa de orificio</b> según el fluido y las condiciones del proceso.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== BONOS ===================== -->
+<section id="bonos">
+  <div class="wrap">
+    <div class="bonus-head reveal">
+      <span class="eyebrow">Y además</span>
+      <h2 class="display">Llévate también estos <span class="hl">4 bonos</span></h2>
+      <p class="narrow">Herramientas pensadas para que pases de la teoría a la planta desde el primer día.</p>
+    </div>
+
+    <div class="bonus reveal">
+      <div class="b-img"><img src="img/pid.webp" alt="Código P&amp;ID" width="700" height="905" loading="lazy" decoding="async"></div>
+      <div>
+        <span class="b-num">Bono #1</span>
+        <h3>Código P&amp;ID: el paso a paso para leer e interpretar diagramas</h3>
+        <p>Deja de ver círculos y líneas. Aprende a leer un P&amp;ID como un mapa de la planta, con un <b>método de 5 pasos</b> y <b>7 ejemplos de diagramas reales</b> resueltos.</p>
+        <ul class="pid-b"><li><b>El método de 5 pasos</b> para leer un P&amp;ID desconocido sin perderte: desde entender el proceso hasta identificar cada lazo de control.</li><li><b>7 diagramas reales resueltos paso a paso:</b> tanque de nitrógeno, planta de biodiésel, reactor químico, intercambiador de calor, control de nivel por bombeo, control de relación y selección de flujo alto y bajo.</li><li><b>Cómo encontrar los lazos de control en el plano</b> y entender qué mide, qué decide y sobre qué actúa cada uno.</li><li><b>Cómo descifrar cualquier TAG en segundos</b> y saber qué hace un instrumento solo con leer su etiqueta.</li><li><b>La simbología que más se usa en planta:</b> líneas de proceso y de señal, válvulas e instrumentos, explicados con ilustraciones para que los reconozcas a primera vista.</li></ul>
+        <!-- EDITAR: valor -->
+        <p class="b-val">Valor: <s>$27 USD</s> · <b>Hoy incluido</b></p>
+      </div>
+    </div>
+    <div class="bonus reveal">
+      <div class="b-img"><img src="img/calibracion.webp" alt="Calibración en Acción" width="700" height="906" loading="lazy" decoding="async"></div>
+      <div>
+        <span class="b-num">Bono #2</span>
+        <h3>Calibración en Acción: el paso a paso para calibrar instrumentos</h3>
+        <p>La guía práctica para calibrar con confianza: procedimientos reales <b>paso a paso</b> para los instrumentos más comunes en planta, con ejemplos, cálculos y registros listos para aplicar en tu trabajo.</p>
+        <ul class="pid-b"><li><b>Cómo calibrar un transmisor de presión con comunicador HART</b>, paso a paso: desde el montaje y la conexión hasta configurar LRV y URV, verificar los 4 mA y aplicar los valores de presión.</li><li><b>Procedimientos completos para los instrumentos que más vas a encontrar en planta:</b> transmisores RTD (PT100), termopares, manómetros, medidores de flujo electromagnéticos y válvulas de control con posicionador.</li><li><b>La calibración de 5 puntos explicada a fondo:</b> cómo calcular los valores de entrada y salida, el error de cada punto, y cómo interpretar la curva para saber si el instrumento cumple o hay que ajustarlo.</li><li><b>Qué revisar cuando un transmisor inteligente no mide bien:</b> los errores más comunes, el diagnóstico del sensor y de la salida, y la diferencia entre trimado digital y ajuste de rango.</li><li><b>Cómo calibrar una válvula de control:</b> ajuste de banco del actuador, recorrido, posicionador y pruebas de linealidad e histéresis.</li><li><b>Cómo documentar como profesional:</b> registro de condiciones encontradas y dejadas, informes y ejemplos de certificados de calibración listos para tomar como referencia.</li><li><b>Los equipos de referencia y patrones que se usan en campo y en taller</b> —calibradores de bloque seco, peso muerto, baños de aceite y más— y cómo elegir el adecuado según el instrumento.</li><li><b>Y además:</b> cómo calibrar analizadores industriales de pH, oxígeno y H₂S, y cómo manejar la deriva con sistemas de autocalibración.</li></ul>
+        <p class="b-val">Valor: <s>$27 USD</s> · <b>Hoy incluido</b></p>
+      </div>
+    </div>
+    <div class="bonus reveal">
+      <div class="b-img"><img src="img/excel.webp" alt="Pack de calculadoras de instrumentación en Excel" width="1000" height="667" loading="lazy" decoding="async"></div>
+      <div>
+        <span class="b-num">Bono #3</span>
+        <h3>Pack de 17 Calculadoras de Instrumentación en Excel</h3>
+        <p>Resuelve en segundos los cálculos que haces en campo y en oficina: introduces los datos y la hoja te da el resultado al instante, sin fórmulas a mano ni errores de conversión.</p>
+        <div class="calc-grid"><div class="cg"><b>Señales y calibración</b><ul class="calc"><li>Escalado 4–20 mA</li><li>Conversión de señales</li><li>Resistencia de lazo</li><li>Escalado PLC (ADC)</li><li>Calibración 5 puntos</li></ul></div><div class="cg"><b>Presión y nivel</b><ul class="calc"><li>Conversor de presión</li><li>Presión hidrostática</li><li>Nivel por DP</li><li>Volumen de tanques</li></ul></div><div class="cg"><b>Caudal</b><ul class="calc"><li>Placa de orificio</li><li>Raíz cuadrada y linealización</li><li>Unidades de flujo</li><li>Másico y volumétrico</li></ul></div><div class="cg"><b>Temperatura</b><ul class="calc"><li>Conversión de temperatura</li><li>Tabla PT100</li><li>Termopares</li><li>Junta fría</li></ul></div></div>
+        <p class="b-val">Valor: <s>$37 USD</s> · <b>Hoy incluido</b></p>
+      </div>
+    </div>
+    <div class="bonus reveal">
+      <div class="b-img"><img src="img/checklist.webp" alt="Checklist de inspección en Excel de un transmisor de presión" width="1000" height="667" loading="lazy" decoding="async"></div>
+      <div>
+        <span class="b-num">Bono #4</span>
+        <h3>Pack de Checklists de Comisionamiento y Mantenimiento</h3>
+        <p>10 formatos en Excel listos para usar en campo: pones en servicio, inspeccionas y documentas cada instrumento con orden profesional, sin olvidar ningún punto y con un registro listo para entregar.</p>
+        <ul class="pid-b">
+          <li><b>Checklists de comisionamiento</b> para verificar la instalación y puesta en servicio antes de arrancar.</li>
+          <li><b>Checklists de mantenimiento</b> para las revisiones periódicas de los equipos más comunes en planta.</li>
+          <li><b>Plantilla de reporte de calibración</b> para registrar resultados y dejar evidencia de tu trabajo.</li>
+        </ul>
+        <div class="calc-grid chk-grid"><div class="cg"><b>Comisionamiento</b><ul class="calc"><li>Sensor RTD</li><li>Termopar</li><li>Transmisor de presión</li></ul></div><div class="cg"><b>Mantenimiento</b><ul class="calc"><li>Válvula de control</li><li>Transmisor de nivel DP (pierna húmeda)</li><li>Nivel por burbujeo</li><li>Báscula de plataforma</li><li>Transmisor de pH</li><li>Transmisor de conductividad</li></ul></div><div class="cg"><b>Calibración</b><ul class="calc"><li>Plantilla de reporte de calibración</li></ul></div></div>
+        <p class="b-val">Valor: <s>$19 USD</s> · <b>Hoy incluido</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== OFERTA ===================== -->
+<section class="offer" id="oferta">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">Todo lo que recibes hoy</span>
+      <h2 class="display" style="color:#fff">Tu sistema completo para dominar la instrumentación industrial</h2>
+    </div>
+    <div class="bundle reveal"><img src="img/bundle.webp" alt="Todo lo que recibes: manual, app InstruMastery, Código P&amp;ID, Calibración en Acción, pack de Excel y checklist" width="1400" height="786" loading="lazy" decoding="async"></div>
+    <div class="offer-card reveal">
+      <div class="top">Manual + App + 4 bonos · Acceso inmediato</div>
+      <div class="body">
+        <!-- EDITAR: valores y precio -->
+        <ul class="stack">
+          <li class="core"><span>Manual ilustrado Instrumentación y Control de Procesos</span><span>$67</span></li>
+          <li class="core"><span>InstruMastery · 11 módulos con simulaciones interactivas <em class="yr">(acceso gratis por un año)</em></span><span>$97</span></li>
+          <li><span>Bono 1 · Código P&amp;ID</span><span>$27</span></li>
+          <li><span>Bono 2 · Calibración en Acción</span><span>$27</span></li>
+          <li><span>Bono 3 · Pack de 17 calculadoras en Excel</span><span>$37</span></li>
+          <li><span>Bono 4 · Pack de 10 checklists de comisionamiento y mantenimiento</span><span>$19</span></li>
+          <li class="total"><span>Valor total</span><span>$274 USD</span></li>
+        </ul>
+        <div class="price">
+          <div class="lbl">Hoy lo llevas todo por solo</div>
+          <div class="now"><small>$</small>47<small> USD</small></div>
+          <span class="save">Ahorras $227 USD</span>
+        </div>
+        <!-- Enlace de pago Hotmart -->
+        <a href="https://pay.hotmart.com/U108163710U" class="btn full checkout">SÍ, QUIERO EL MANUAL + LA APP<small>Pago único · Acceso inmediato</small></a>
+        <div class="secure"><span>🔒 Pago 100 % seguro</span><span>💳 Tarjeta y otros métodos</span><span>📩 Acceso por correo</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GARANTÍA ===================== -->
+<section>
+  <div class="narrow">
+    <div class="guarantee reveal">
+      <div class="seal"><div><b>7</b>DÍAS DE<br>GARANTÍA</div></div>
+      <div>
+        <!-- EDITAR: días de garantía -->
+        <h3>Tu inversión está protegida</h3>
+        <p>Revisa el manual y los bonos con calma. Si en los próximos 7 días sientes que no es para ti, escríbenos y te devolvemos el 100 % de tu dinero. Sin preguntas incómodas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PARA QUIÉN ===================== -->
+<section style="background:var(--bg-2)">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">¿Es para ti?</span>
+      <h2 class="display">Este manual es para ti si…</h2>
+    </div>
+    <div class="who">
+      <div class="yes reveal" style="background:#fff">
+        <h3>Es para ti si</h3>
+        <ul>
+          <li>Eres técnico electricista, de mantenimiento o instrumentista que quiere entender el porqué.</li>
+          <li>Eres estudiante de electrónica, mecatrónica o automatización.</li>
+          <li>Trabajas en planta y quieres dejar de depender de “lo que te enseñó un compañero”.</li>
+          <li>Quieres leer P&amp;ID y hablar con ingeniería con seguridad.</li>
+          <li>Buscas crecer hacia puestos de instrumentación y control.</li>
+        </ul>
+      </div>
+      <div class="no reveal">
+        <h3>No es para ti si</h3>
+        <ul>
+          <li>Buscas un tratado lleno de ecuaciones y demostraciones.</li>
+          <li>Ya dominas calibración, P&amp;ID y sintonía PID a nivel experto.</li>
+          <li>No estás dispuesto a dedicar un poco de tiempo a estudiar.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="faq">
+  <div class="narrow">
+    <div class="center reveal">
+      <span class="eyebrow">Dudas frecuentes</span>
+      <h2 class="display">Preguntas frecuentes</h2>
+    </div>
+    <details class="reveal"><summary>¿Necesito experiencia previa?</summary><p>No. El manual parte desde cero y explica los conceptos con lenguaje sencillo e ilustraciones. Si ya tienes experiencia, te ayudará a unir las piezas sueltas.</p></details>
+    <details class="reveal"><summary>¿En qué formato recibo el manual?</summary><p>Recibes el manual y los bonos en formato digital. Puedes leerlos en tu computadora, tablet o celular, e imprimirlos si lo prefieres.</p></details>
+    <details class="reveal"><summary>¿Cómo funciona la app InstruMastery?</summary><p>Es una app web: entras desde el navegador de tu computadora o tu celular, sin instalar nada. Avanzas por 11 módulos con lecciones, simulaciones interactivas y un cuestionario al final de cada lección. Con tu compra tienes <b>acceso gratis a la app durante un año</b>.</p></details>
+    <details class="reveal"><summary>¿Por qué un manual y una app?</summary><p>Porque leer te ayuda a entender el porqué, y practicar te ayuda a fijarlo. El manual te explica cada tema y la app te deja experimentarlo y comprobar que lo aprendiste.</p></details>
+    <details class="reveal"><summary>¿Cómo y cuándo recibo el acceso?</summary><p>Inmediatamente después de completar tu pago recibirás un correo con el acceso al manual, a la app InstruMastery y a todos los bonos.</p></details>
+    <details class="reveal"><summary>¿Necesito comprar equipos para aprender?</summary><p>No. Puedes comprender todo el contenido sin equipos. Si tienes un multímetro, podrás practicar las comprobaciones de lazos de 4–20 mA que se explican.</p></details>
+    <details class="reveal"><summary>¿Tiene muchos cálculos complicados?</summary><p>No. Se explican los principios de física necesarios de forma sencilla, sin complicarte con cálculos innecesarios. Las calculadoras en Excel te ayudan con lo numérico.</p></details>
+    <details class="reveal"><summary>¿Y si no me gusta?</summary><p>Tienes 7 días de garantía. Si no es para ti, te devolvemos tu dinero.</p></details>
+  </div>
+</section>
+
+<!-- ===================== CIERRE ===================== -->
+<section class="closing">
+  <div class="narrow">
+    <h2 class="display" style="color:#fff">Deja de acumular piezas sueltas.<br><span class="hl">Empieza a entender el sistema.</span></h2>
+    <p>La próxima vez que estés frente a un transmisor, un controlador o una válvula, puedes seguir esperando que alguien te explique… o puedes ser tú quien sepa qué está pasando y por qué.</p>
+    <div style="margin:30px 0 0"><a href="#oferta" class="btn">QUIERO EMPEZAR HOY<small>Manual + App + 4 bonos</small></a></div>
+    <div class="ps"><b>P.D.</b> Recuerda: hoy no te llevas solo un manual. Te llevas un sistema completo para <b>estudiar, practicar y comprobar</b> lo que aprendes —el manual ilustrado y la app InstruMastery— más 4 bonos: Código P&amp;ID, Calibración en Acción, calculadoras en Excel y checklists de comisionamiento y mantenimiento. Todo por un solo pago y con 7 días de garantía.</div>
+  </div>
+</section>
+
+<footer>
+  © <span id="yr"></span> Roni Domínguez · Faradayos — Conocimiento Industrial<br>
+  Este producto es de carácter educativo. Los resultados dependen de la dedicación de cada persona.
+</footer>
+
+<div class="sticky" id="sticky">
+  <div class="p">Manual + App<b>$47 USD</b></div>
+  <a href="#oferta" class="btn">LO QUIERO</a>
+</div>
+
+<script>
+document.querySelectorAll('.peek').forEach(function(p){['contextmenu','dragstart'].forEach(function(ev){p.addEventListener(ev,function(e){e.preventDefault()})})});
+// Filtros de contenido
+document.getElementById('filters').addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;
+  this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});
+  var f=b.dataset.f;
+  document.querySelectorAll('#learn .item').forEach(function(it){
+    it.classList.toggle('hide',f!=='all'&&it.dataset.c!==f);it.classList.add('in');
+  });
+});
+// Animaciones de entrada
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});
+  els.forEach(function(e){io.observe(e)});
+})();
+// Barra fija en móvil
+(function(){
+  var s=document.getElementById('sticky'),o=document.getElementById('oferta');
+  function chk(){
+    var r=o.getBoundingClientRect(),inOffer=r.top<window.innerHeight&&r.bottom>0;
+    s.classList.toggle('show',window.scrollY>600&&!inOffer);
+  }
+  window.addEventListener('scroll',chk,{passive:true});chk();
+})();
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
